@@ -10,31 +10,40 @@ using std::setw;
 void laba1()
 {
 	setlocale(0, "ru");
-	srand(clock());
 
 	float** mat = nullptr;
 	float* b = nullptr;
 
+	cout << "Программа для обхода матрицы по часовой стрелке" << endl;
+	cout << endl;
 	int n = 0;
+	
+	cout << "Введите размер матрицы N x N:" << endl;;
+	cout << "Введите N=";
 	cin >> n;
+	cout << endl;
 
 	mat = new float* [n];
-	b = new float[n * n]{ 999 };
+	b = new float[n * n];
 
 	for (size_t i = 0; i < n; i++)
 	{
 		mat[i] = new float[n];
 	}
 
+	cout << "Введите элементы матрицы A:" << endl;
 	for (size_t i = 0; i < n; i++)
 	{
 		for (size_t j = 0; j < n; j++)
 		{
-			mat[i][j] = rand() % (200) - 100;
+			cout << "(" << i << ")(" << j << ")=";
+			cin >> mat[i][j];
+			//mat[i][j] = rand() % 100;
 		}
 	}
+	cout << endl;
 
-	for (size_t i = 0; i < n; i++)
+	/*for (size_t i = 0; i < n; i++)
 	{
 		for (size_t j = 0; j < n; j++)
 		{
@@ -43,7 +52,7 @@ void laba1()
 		cout << endl;
 	}
 
-	cout << endl;
+	cout << endl;*/
 
 	int step = 1;
 	int curIter = 0;
@@ -52,11 +61,11 @@ void laba1()
 	int k = 0;
 	int i = n;
 	int j = 0;
-	bool bl = true;
 	int v = 0;
-	bool bl1 = true;
+	bool bl = true;
 	int g = 0;
-	while (true)
+
+	while (k < n * n)
 	{
 
 		if (step == 1)
@@ -84,10 +93,10 @@ void laba1()
 		{
 			step++;
 			
-			if (bl1)
+			if (bl)
 			{
 				v++;
-				bl1 = false;
+				bl = false;
 
 			}
 			if (step == 4)
@@ -102,6 +111,7 @@ void laba1()
 			}
 			else if (step > 4)
 				step = 1;
+
 			curIter = v;
 		}
 		else
@@ -110,24 +120,19 @@ void laba1()
 		}
 
 		b[k] = mat[i][j];
-		cout << b[k] << " ";
+		//cout << b[k] << " ";
 		k++;
-
-		if (k >= n * n)
-		{
-			break;
-		}
 	}
 
 	cout << endl;
-	cout << endl;
 
+	cout << "Полученная матрца B={ ";
 	for (size_t i = 0; i < n * n; i++)
 	{
 		cout << b[i] << " ";
 	}
 
-	cout << endl;
+	cout << "}" << endl;
 	cout << endl;
 
 	for (size_t i = 0; i < n; i++)
